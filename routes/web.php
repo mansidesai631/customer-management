@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +17,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes(['register' => false]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('users', UserController::class);
+Route::resource('products', ProductController::class);
+Route::get('/getUserProduct/{user}', 'UserController@getUserProduct')->name('getUserProduct');
+Route::get('/countCustomer', 'UserController@countCustomer')->name('countCustomer');
