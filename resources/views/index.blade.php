@@ -13,6 +13,19 @@
     </div>
 </div>
 
+<div align="center">
+    <form action="{{ route('users.index') }}" method="GET" style="margin-top: 20px;">
+        <select name="gender" id="input" class="col-md-1">
+            <option >Select Gender</option>
+            <option value="1">Man</option>
+            <option value="0">Woman</option>
+        </select>
+        <input type="text" name="zip" placeholder="Zip Code"/>
+        <input type="submit" class="btn btn-info btn-sm" value="Filter">
+    </form>
+</div>
+
+
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -43,6 +56,9 @@
  @endforeach
 </table>
 
+<div class="mr-5">
+Displaying <strong>{{$users->count()}}</strong> of <strong>{{ $users->total() }}</strong>&nbsp;Customers
+</div>
 
 {!! $users->render() !!}
 @endsection

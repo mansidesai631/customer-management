@@ -20,7 +20,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::whereNotIn('id', [auth()->id()])->orderBy('id','DESC')->paginate(5);
+        $data = User::whereNotIn('id', [auth()->id()]);
+
+        if ($request->zip != null) {
+            $data = $data->where('zip', '=', $request->zip);
+        }
+        if ($request->gender == '0' || $request->gender == '1') {
+            $data = $data->where('gender', '=', $request->gender);
+        }
+        $data = $data->orderBy('id','DESC')->paginate(5);
         return view('index')
             ->with('users', $data);
     }
